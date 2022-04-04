@@ -1,5 +1,4 @@
 //Bubble Sort
-let arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 const bubbleSort = (array) => {
   const newArray = array;
   let pass = newArray.length - 1;
@@ -20,5 +19,6 @@ const bubbleSort = (array) => {
   return newArray;
 };
 
+let arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 const sorted = bubbleSort(arr);
 console.log(sorted);
