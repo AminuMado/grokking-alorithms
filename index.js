@@ -1,1 +1,6 @@
-// Selection Sort
+//Bubble Sort
+
+const bubbleSort = (array) => {
+  const newArray = [];
+  return newArray;
+};
