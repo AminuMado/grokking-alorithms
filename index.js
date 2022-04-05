@@ -1,40 +1,38 @@
-// Binary Search
-const binarySearch = (target, array) => {
-  // This is a sorting algorithm that takes a number to be searched within some array
-  // How it works
-  // You have an upper and lower band and you continiously eliminate sections of the code youre not using
-  // example say you have an array = [1,2,3,4,5,6,7,8,9,10]
-  // you wanna play a guessing game, the only rule is you get a hint if youre wrong weather your guess is higher or lower
-  // lets say the target number is 8
-  // You start at the middle point ie 5
-  // 5 is wrong but you get the hint that your guessed number is lower
-  // so with that information you can safely discard all numbers lower than 5 so your array of intrest is now
-  // [6,7,8,9 10]
-  // you take the middle number of the array again which is 8 and you have your answer
-  // Steps
-  // have a lower boundry and upper boundry
-  // get the mid point of the lower and upper boundry
-  // check if mid number is equal to target number
-  // if less than discard upper boundry
-  // if greater than discard lower boundry
-  // repeat until convergence
-  let lowerBoundry = 0;
-  let upperBoundry = array.length - 1;
-  let midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
-  while (target !== array[midPoint]) {
-    if (target > array[midPoint]) {
-      lowerBoundry = midPoint + 1;
-      midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
-    } else if (target < array[midPoint]) {
-      upperBoundry = midPoint - 1;
-      midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
+//Insertion Sort
+// This is another sorting algorithm that has an alternative approach to sorting from bubble sort and selection sort
+// Steps
+// As with most sorting algorithms you start with a loop to iterate through all the array
+// you select i+1 in the first pass-through (the second cell).
+// you make a comparision with the cell preceding it, if the element preceding it is greater you swap them around else you move on to the next pass
+// and you loop to the next element
+//
+
+const insertionSort = (array) => {
+  // for index in range(1, len(array)):
+  // temp_value = array[index]
+  // position = index - 1
+  // while position >= 0:
+  // if array[position] > temp_value:
+  // array[position + 1] = array[position]
+  // position = position - 1
+
+  for (let i = 0; i < array.length - 1; i++) {
+    const tempValue = array[i + 1];
+    let position = i;
+
+    while (position >= 0) {
+      if (array[position] > tempValue) {
+        //make the shift of position
+        array[position + 1] = array[position];
+      } else break;
+
+      position--;
     }
-    console.log(array[midPoint]);
+    array[position + 1] = tempValue;
   }
-  return array[midPoint];
+  return array;
 };
-const myArray = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30,
-];
-const answer = binarySearch(14, myArray);
+
+const myArray = [10, 9, 8, 7, 5, 1, 3, 2, 4, 6];
+const sortedArray = insertionSort(myArray);
+console.log(sortedArray); //[1,2,3,4,5,6,7,8,9,10]
