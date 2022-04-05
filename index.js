@@ -1,6 +1,6 @@
 // Selection Sort
 
-// This is a slow alogrithm that passes through every item find the smallest item and place it in a new array
+// This is a faster alogrithm compared to bubble sort that passes through every item find the smallest item and place it in a new array
 // this usually uses a nested for loop for operation
 // steps
 // Youd have to find the smallest or largest item during a pass
