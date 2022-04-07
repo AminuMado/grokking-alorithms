@@ -1,40 +1,40 @@
-// Binary Search
-const binarySearch = (target, array) => {
-  // This is a sorting algorithm that takes a number to be searched within some array
-  // How it works
-  // You have an upper and lower band and you continiously eliminate sections of the code youre not using
-  // example say you have an array = [1,2,3,4,5,6,7,8,9,10]
-  // you wanna play a guessing game, the only rule is you get a hint if youre wrong weather your guess is higher or lower
-  // lets say the target number is 8
-  // You start at the middle point ie 5
-  // 5 is wrong but you get the hint that your guessed number is lower
-  // so with that information you can safely discard all numbers lower than 5 so your array of intrest is now
-  // [6,7,8,9 10]
-  // you take the middle number of the array again which is 8 and you have your answer
-  // Steps
-  // have a lower boundry and upper boundry
-  // get the mid point of the lower and upper boundry
-  // check if mid number is equal to target number
-  // if less than discard upper boundry
-  // if greater than discard lower boundry
-  // repeat until convergence
-  let lowerBoundry = 0;
-  let upperBoundry = array.length - 1;
-  let midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
-  while (target !== array[midPoint]) {
-    if (target > array[midPoint]) {
-      lowerBoundry = midPoint + 1;
-      midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
-    } else if (target < array[midPoint]) {
-      upperBoundry = midPoint - 1;
-      midPoint = Math.floor((lowerBoundry + upperBoundry) / 2);
+const merge = (array_1, array_2) => {
+  const new_array = [];
+  let array_1_pointer = 0;
+  let array_2_pointer = 0;
+  let count = 0;
+  // Run the loop until we've reached end of both arrays:
+  while (array_1_pointer < array_1.length || array_2_pointer < array_2.length) {
+    count++;
+    // If we already reached the end of the first array,
+    //  add item from second array:
+    if (!array_1[array_1_pointer]) {
+      new_array.push(array_2[array_2_pointer]);
+      array_2_pointer += 1;
     }
-    console.log(array[midPoint]);
+    // If we already reached the end of the second array,
+    // add item from first array:
+    else if (!array_2[array_2_pointer]) {
+      new_array.push(array_1[array_1_pointer]);
+      array_1_pointer += 1;
+    }
+    // If the current number in first array is less than current
+    //  number in second array, add from first array:
+    else if (array_1[array_1_pointer] < array_2[array_2_pointer]) {
+      new_array.push(array_1[array_1_pointer]);
+      array_1_pointer += 1;
+    }
+    //  If the current number in second array is less than or equal
+    // to current number in first array, add from second array:
+    else {
+      new_array.push(array_2[array_2_pointer]);
+      array_2_pointer += 1;
+    }
   }
-  return array[midPoint];
+  console.log(count);
+  return new_array;
 };
-const myArray = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30,
-];
-const answer = binarySearch(14, myArray);
+const arr1 = [1, 2, 3, 4];
+const arr2 = [2, 3, 4, 5, 6, 7, 8];
+const ans = merge(arr1, arr2);
+console.log(ans);
