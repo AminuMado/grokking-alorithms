@@ -226,10 +226,34 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 // console.log(myArray);
 
 // Recursion Contd
-const countStrings = (array) => {
-  if (array.length === 1) return array[0].length;
-  return array[0].length + countStrings(array.slice(1));
+// const countStrings = (array) => {
+//   if (array.length === 1) return array[0].length;
+//   return array[0].length + countStrings(array.slice(1));
+// };
+// const myArray = ["abcd", "efgh", "ijk", "lm", "no", "p"];
+// const ans = countStrings(myArray);
+// console.log(ans);
+
+// const even = (array) => {
+//   const result = [];
+//   if (array[0] % 2 === 0) {
+//     result.push(array[0]);
+//   }
+//   if (array.length === 1) {
+//     return result;
+//   }
+//   return result.concat(even(array.slice(1)));
+// };
+// Alternatively
+const even = (array, result) => {
+  if (array.length != 0) {
+    if (array[0] % 2 === 0) {
+      result.push(array[0]);
+    }
+    even(array.slice(1), result);
+  }
 };
-const myArray = ["abcd", "efgh", "ijk", "lm", "no", "p"];
-const ans = countStrings(myArray);
-console.log(ans);
+const result = [];
+const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
+const ans = even(myArray, result);
+console.log(result);
