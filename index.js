@@ -258,10 +258,22 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 // const ans = even(myArray, result);
 // console.log(result);
 
-const triangleNumber = (n) => {
-  if (n < 1) return "Less than 1";
-  if (n === 1) return 1;
-  return n + triangleNumber(n - 1);
+// const triangleNumber = (n) => {
+//   if (n < 1) return "Less than 1";
+//   if (n === 1) return 1;
+//   return n + triangleNumber(n - 1);
+// };
+// const ans = triangleNumber(7);
+// console.log(ans);
+
+const findX = (string, index = 0) => {
+  if (string.length != 0) {
+    if (string[0] === "x") return index;
+    index++;
+    return findX(string.slice(1), index);
+  }
+  return "x not in string";
 };
-const ans = triangleNumber(7);
+const myString = "abcdefghijklmnopqrstuvwxyz";
+const ans = findX(myString);
 console.log(ans);
