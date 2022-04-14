@@ -245,15 +245,23 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 //   return result.concat(even(array.slice(1)));
 // };
 // Alternatively
-const even = (array, result) => {
-  if (array.length != 0) {
-    if (array[0] % 2 === 0) {
-      result.push(array[0]);
-    }
-    even(array.slice(1), result);
-  }
+// const even = (array, result) => {
+//   if (array.length != 0) {
+//     if (array[0] % 2 === 0) {
+//       result.push(array[0]);
+//     }
+//     even(array.slice(1), result);
+//   }
+// };
+// const result = [];
+// const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
+// const ans = even(myArray, result);
+// console.log(result);
+
+const triangleNumber = (n) => {
+  if (n < 1) return "Less than 1";
+  if (n === 1) return 1;
+  return n + triangleNumber(n - 1);
 };
-const result = [];
-const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
-const ans = even(myArray, result);
-console.log(result);
+const ans = triangleNumber(7);
+console.log(ans);
