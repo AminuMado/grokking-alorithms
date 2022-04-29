@@ -266,14 +266,41 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 // const ans = triangleNumber(7);
 // console.log(ans);
 
-const findX = (string, index = 0) => {
-  if (string.length != 0) {
-    if (string[0] === "x") return index;
-    index++;
-    return findX(string.slice(1), index);
+// const findX = (string, index = 0) => {
+//   if (string.length != 0) {
+//     if (string[0] === "x") return index;
+//     index++;
+//     return findX(string.slice(1), index);
+//   }
+//   return "x not in string";
+// };
+// const myString = "abcdefghijklmnopqrstuvwxyz";
+// const ans = findX(myString);
+// console.log(ans);
+// const uniquePaths = (m, n) => {
+//   if (m == 1 || n == 1) return 1;
+//   return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+// };
+// const ans = uniquePaths(2, 3);
+// console.log(ans);
+// Dynamic Programming
+// const add_until_100 = (array) => {
+//   console.log("r");
+//   if (array.length == 0) return 0;
+//   const upTo100 = add_until_100(array.slice(1));
+//   if (array[0] + upTo100 > 100) return upTo100;
+//   else return array[0] + upTo100;
+// };
+// const myArray = [1, 2, 66, 33, 2, 4, 7];
+
+// console.log(add_until_100(myArray));
+
+const golomb = (n, memo = {}) => {
+  console.log("r");
+  if (n == 1) return 1;
+  if (!memo[n]) {
+    memo[n] = 1 + golomb(n - golomb(golomb(n - 1, memo), memo), memo);
   }
-  return "x not in string";
+  return memo[n];
 };
-const myString = "abcdefghijklmnopqrstuvwxyz";
-const ans = findX(myString);
-console.log(ans);
+console.log(golomb(3));
