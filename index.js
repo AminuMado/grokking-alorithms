@@ -314,32 +314,58 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 // };
 // console.log(uniquePaths(4, 4));
 //Partition
-const partition = (arr) => {
-  let L = 0;
-  let R = arr.length - 2;
-  const pivot = arr[arr.length - 1];
-  let shouldRun = true;
 
-  // you just add L by one stage during every pass and reduce R by one stage during every pass
-  while (shouldRun) {
-    console.log("ran");
-    // make a comparison for the pointer with the pivot
-    while (arr[L] < pivot) L++;
-    while (arr[R] > pivot) R--;
-    if (L >= R) break;
-    else {
-      const temp = arr[L];
-      arr[L] = arr[R];
-      arr[R] = temp;
-      L++;
-    }
+// const myArray = [0, 5, 2, 2, 6, 30, 44, -2, 11, 1, 6, 3];
+// console.log(partition(myArray));
+
+// const qs(arr){
+//     const quickSort =(L,R)=>{
+//         if R-L <= 0 return
+//         const pivotIndex =
+//     }
+//     const partition = (arr) => {
+//         let L = 0;
+//         let R = arr.length - 2;
+//         const pivot = arr[arr.length - 1];
+//         let shouldRun = true;
+//         while (shouldRun) {
+//           while (arr[L] < pivot) L++;
+//           while (arr[R] > pivot) R--;
+//           if (L >= R) break;
+//           else {
+//             const temp = arr[L];
+//             arr[L] = arr[R];
+//             arr[R] = temp;
+//             L++;
+//           }
+//         }
+//         arr[arr.length - 1] = arr[L];
+//         arr[L] = pivot;
+//         return arr;
+//       };
+// }
+
+class SortableArray {
+  constructor(array) {
+    this.array = array;
   }
-
-  arr[arr.length - 1] = arr[L];
-  arr[L] = pivot;
-
-  return arr;
-};
-
-const myArray = [0, 5, 2, 2, 6, 30, 44, -2, 11, 1, 6, 3];
-console.log(partition(myArray));
+  partition(leftPointer, rightPointer) {
+    const pivotIndex = rightPointer;
+    const pivot = this.array[pivotIndex];
+    let shouldRun = true;
+    rightPointer--;
+    while (shouldRun) {
+      while (this.array[leftPointer] < pivot) leftPointer++;
+      while (this.array[rightPointer] > pivot) rightPointer--;
+      if (leftPointer >= rightPointer) shouldRun = false;
+      else {
+        const temp = this.array[leftPointer];
+        this.array[leftPointer] = this.array[rightPointer];
+        this.array[rightPointer] = temp;
+      }
+    }
+    this.array[pivotIndex] = this.array[leftPointer];
+    this.array[leftPointer] = pivot;
+    return leftPointer;
+  }
+}
