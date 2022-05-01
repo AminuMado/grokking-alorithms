@@ -304,7 +304,7 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 //   return memo[n];
 // };
 // console.log(golomb(3));
-
+// unique path with memoziation
 // const uniquePaths = (m, n, memo = {}) => {
 //   console.log("r");
 //   if (m == 1 || n == 1) return 1;
@@ -313,3 +313,37 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 //   return memo[[m, n]];
 // };
 // console.log(uniquePaths(4, 4));
+//Partition
+const partition = (arr) => {
+  let L = 0;
+  let R = arr.length - 2;
+  const pivot = arr[arr.length - 1];
+  let shouldRun = true;
+
+  // you just add L by one stage during every pass and reduce R by one stage during every pass
+  while (shouldRun) {
+    console.log("ran");
+    // make a comparison for the pointer with the pivot
+    while (arr[L] < pivot) {
+      L++;
+    }
+    while (arr[R] > pivot) {
+      R--;
+    }
+    if (L >= R) {
+      shouldRun = false;
+    } else {
+      const temp = arr[L];
+      arr[L] = arr[R];
+      arr[R] = temp;
+    }
+  }
+
+  arr[arr.length - 1] = arr[L];
+  arr[L] = pivot;
+
+  return arr;
+};
+
+const myArray = [0, 5, 2, 2, 6, 30, 44, -2, 11, 1, 6, 3];
+console.log(partition(myArray));
