@@ -324,18 +324,14 @@ const partition = (arr) => {
   while (shouldRun) {
     console.log("ran");
     // make a comparison for the pointer with the pivot
-    while (arr[L] < pivot) {
-      L++;
-    }
-    while (arr[R] > pivot) {
-      R--;
-    }
-    if (L >= R) {
-      shouldRun = false;
-    } else {
+    while (arr[L] < pivot) L++;
+    while (arr[R] > pivot) R--;
+    if (L >= R) break;
+    else {
       const temp = arr[L];
       arr[L] = arr[R];
       arr[R] = temp;
+      L++;
     }
   }
 
