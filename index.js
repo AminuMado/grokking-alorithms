@@ -368,4 +368,10 @@ class SortableArray {
     this.array[leftPointer] = pivot;
     return leftPointer;
   }
+  quicksort(leftIndex, rightIndex) {
+    if (rightIndex - leftIndex <= 0) return;
+    const pivotIndex = this.partition(leftIndex, rightIndex);
+    this.quicksort(leftIndex, pivotIndex - 1);
+    this.quicksort(pivotIndex + 1, rightIndex);
+  }
 }
