@@ -345,88 +345,96 @@ const arr2 = [2, 3, 4, 5, 6, 7, 8];
 //       };
 // }
 
-class SortableArray {
-  constructor(array) {
-    this.array = array;
-  }
-  partition(leftPointer, rightPointer) {
-    const pivotIndex = rightPointer;
-    const pivot = this.array[pivotIndex];
-    let shouldRun = true;
-    rightPointer--;
-    while (shouldRun) {
-      while (this.array[leftPointer] < pivot) leftPointer++;
-      while (this.array[rightPointer] > pivot) rightPointer--;
-      if (leftPointer >= rightPointer) shouldRun = false;
-      else {
-        const temp = this.array[leftPointer];
-        this.array[leftPointer] = this.array[rightPointer];
-        this.array[rightPointer] = temp;
-      }
-    }
-    this.array[pivotIndex] = this.array[leftPointer];
-    this.array[leftPointer] = pivot;
-    return leftPointer;
-  }
-  quickSort(leftIndex, rightIndex) {
-    if (rightIndex - leftIndex <= 0) return;
-    const pivotIndex = this.partition(leftIndex, rightIndex);
-    this.quickSort(leftIndex, pivotIndex - 1);
-    this.quickSort(pivotIndex + 1, rightIndex);
-  }
-  quickSelect(kthLowestValue, leftIndex, rightIndex) {
-    if (rightIndex - leftIndex <= 0) return this.array[leftIndex];
-    const pivotIndex = this.partition(leftIndex, rightIndex);
-    if (kthLowestValue < pivotIndex) {
-      this.quickSelect(kthLowestValue, leftIndex, pivotIndex - 1);
-    } else if (kthLowestValue > pivotIndex) {
-      this.quickSelect(kthLowestValue, pivotIndex + 1, rightIndex);
-    } else return this.array[pivotIndex];
+// class SortableArray {
+//   constructor(array) {
+//     this.array = array;
+//   }
+//   partition(leftPointer, rightPointer) {
+//     const pivotIndex = rightPointer;
+//     const pivot = this.array[pivotIndex];
+//     let shouldRun = true;
+//     rightPointer--;
+//     while (shouldRun) {
+//       while (this.array[leftPointer] < pivot) leftPointer++;
+//       while (this.array[rightPointer] > pivot) rightPointer--;
+//       if (leftPointer >= rightPointer) shouldRun = false;
+//       else {
+//         const temp = this.array[leftPointer];
+//         this.array[leftPointer] = this.array[rightPointer];
+//         this.array[rightPointer] = temp;
+//       }
+//     }
+//     this.array[pivotIndex] = this.array[leftPointer];
+//     this.array[leftPointer] = pivot;
+//     return leftPointer;
+//   }
+//   quickSort(leftIndex, rightIndex) {
+//     if (rightIndex - leftIndex <= 0) return;
+//     const pivotIndex = this.partition(leftIndex, rightIndex);
+//     this.quickSort(leftIndex, pivotIndex - 1);
+//     this.quickSort(pivotIndex + 1, rightIndex);
+//   }
+//   quickSelect(kthLowestValue, leftIndex, rightIndex) {
+//     if (rightIndex - leftIndex <= 0) return this.array[leftIndex];
+//     const pivotIndex = this.partition(leftIndex, rightIndex);
+//     if (kthLowestValue < pivotIndex) {
+//       this.quickSelect(kthLowestValue, leftIndex, pivotIndex - 1);
+//     } else if (kthLowestValue > pivotIndex) {
+//       this.quickSelect(kthLowestValue, pivotIndex + 1, rightIndex);
+//     } else return this.array[pivotIndex];
+//   }
+// }
+// //Exercises
+// //1.Given an array return the greatest
+// const returnLargestProduct = (arr) => {
+//   const sort = new SortableArray(arr);
+//   sort.quickSort(0, arr.length - 1);
+//   return (
+//     sort.array[arr.length - 1] *
+//     sort.array[arr.length - 2] *
+//     sort.array[arr.length - 3]
+//   );
+// };
+// console.log(returnLargestProduct([6, 2, 9, 3, 1, 7]));
+// //2. Find missing number given an array of numbers
+// // Solution you sort the array and the numbers will be arranged then you loop through the array and compare the index number with the array value
+// // any number that doesnt match is the missing number, this is assuming the array contains numbers from 0-N
+// const findMissingNumber = (arr) => {
+//   const x = new SortableArray(arr);
+//   x.quickSort(0, arr.length - 1); // sorted
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log(i);
+//     if (i !== x.array[i]) return `${i} is missing`;
+//   }
+// };
+// console.log(findMissingNumber([9, 2, 3, 5, 1, 7, 0]));
+// //3.Find greatest number within a given array
+// //Solution write 3 different implementations, one is to use a nested for loop take a number and compare it with every other number in the array
+// // sort the array and return the largest number from the index
+// // use selection sort
+// const findLargestNumber = (arr) => {
+//   //This is O(N)
+//   // let largestNumberSoFar = arr[0];
+//   // for (let i = 0; i < arr.length; i++) {
+//   //   if (arr[i] > largestNumberSoFar) largestNumberSoFar = arr[i];
+//   // }
+//   // return largestNumberSoFar;
+//   //This is O(N) also
+//   // const x = new SortableArray(arr);
+//   // x.quickSelect(arr.length - 1, 0, arr.length - 1);
+//   // console.log(x.array);
+//   // return x.array[arr.length - 1];
+//   //This is O(NlogN)
+//   // const x = new SortableArray(arr);
+//   // x.quickSort(0, arr.length - 1);
+//   // return x.array[arr.length - 1];
+// };
+// console.log(findLargestNumber([20, 30, 1, 400, 22, 76, 10, 8, 90, 39, 33, 0]));
+
+//Linked Lists
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
   }
 }
-//Exercises
-//1.Given an array return the greatest
-const returnLargestProduct = (arr) => {
-  const sort = new SortableArray(arr);
-  sort.quickSort(0, arr.length - 1);
-  return (
-    sort.array[arr.length - 1] *
-    sort.array[arr.length - 2] *
-    sort.array[arr.length - 3]
-  );
-};
-console.log(returnLargestProduct([6, 2, 9, 3, 1, 7]));
-//2. Find missing number given an array of numbers
-// Solution you sort the array and the numbers will be arranged then you loop through the array and compare the index number with the array value
-// any number that doesnt match is the missing number, this is assuming the array contains numbers from 0-N
-const findMissingNumber = (arr) => {
-  const x = new SortableArray(arr);
-  x.quickSort(0, arr.length - 1); // sorted
-  for (let i = 0; i < arr.length; i++) {
-    console.log(i);
-    if (i !== x.array[i]) return `${i} is missing`;
-  }
-};
-console.log(findMissingNumber([9, 2, 3, 5, 1, 7, 0]));
-//3.Find greatest number within a given array
-//Solution write 3 different implementations, one is to use a nested for loop take a number and compare it with every other number in the array
-// sort the array and return the largest number from the index
-// use selection sort
-const findLargestNumber = (arr) => {
-  //This is O(N)
-  // let largestNumberSoFar = arr[0];
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (arr[i] > largestNumberSoFar) largestNumberSoFar = arr[i];
-  // }
-  // return largestNumberSoFar;
-  //This is O(N) also
-  // const x = new SortableArray(arr);
-  // x.quickSelect(arr.length - 1, 0, arr.length - 1);
-  // console.log(x.array);
-  // return x.array[arr.length - 1];
-  //This is O(NlogN)
-  // const x = new SortableArray(arr);
-  // x.quickSort(0, arr.length - 1);
-  // return x.array[arr.length - 1];
-};
-console.log(findLargestNumber([20, 30, 1, 400, 22, 76, 10, 8, 90, 39, 33, 0]));
