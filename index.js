@@ -438,3 +438,81 @@ class Node {
     this.next = null;
   }
 }
+
+class LinkedList {
+  constructor(head) {
+    this.head = head;
+  }
+  read(index) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentIndex === index) return currentNode.val;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    return null;
+  }
+  search(val) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.val === val) return currentIndex;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    console.log("val doesnt exist in list");
+    return null;
+  }
+  insert(index, val) {
+    // To insert a node you first create the node with the given value
+    // we then consider the location in which we wanna place it
+    const newNode = new Node(val);
+    if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+    } else {
+      let currentNode = this.head;
+      let currentIndex = 0;
+      while (currentNode !== null) {
+        if (currentIndex === index - 1) {
+          newNode.next = currentNode.next;
+          currentNode.next = newNode;
+        }
+        currentNode = currentNode.next;
+        currentIndex++;
+      }
+    }
+  }
+  // Recursive Solution
+  readRecusive(index, currentIndex = 0, head = this.head) {
+    if (head === null) return null;
+    if (currentIndex === index) return head.val;
+    return this.readRecusive(index, currentIndex + 1, head.next);
+  }
+  altReadRecursive(index, head = this.head) {
+    if (head === null) return null;
+    if (index === 0) return head.val;
+    return this.altReadRecursive(index - 1, head.next);
+  }
+  searchRecursive(val, currentIndex = 0, head = this.head) {
+    if (head === null) return null;
+    if (head.val === val) return currentIndex;
+    return this.searchRecursive(val, currentIndex + 1, head.next);
+  }
+  insertRecursive(index, head = this.head) {}
+}
+const a = new Node("A");
+const b = new Node("B");
+const c = new Node("C");
+const d = new Node("D");
+a.next = b;
+b.next = c;
+c.next = d;
+const list = new LinkedList(a);
+console.log(list.read(2));
+console.log(list.altReadRecursive(3));
+console.log(list.search("C"));
+console.log(list.searchRecursive("E"));
+console.log(list.head);
+list.insert(4, "E");
